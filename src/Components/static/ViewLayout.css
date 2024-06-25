@@ -1,0 +1,70 @@
+body{
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-collapse ul li a {
+    color: #211E3B;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+.navbar{
+    background-color: #4ef54e;
+    background-image: linear-gradient(45deg, #4ef54e 0%, #FFFB7D 100%);
+}
+.navbar-nav{
+    
+    position: relative;
+    padding-left: 100px;
+}
+
+.navbar-brand img
+{
+    height: auto;
+    max-width: 230px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin-left: 15px;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: #211E3B !important;
+}
+
+.navbar-toggler
+{
+    background-color: #336633;
+}
+.d-flex {
+    position: absolute;
+    padding-top: 40px;
+    right: 30px;
+}
+.d-flex img{
+    margin-top: -20px;
+    padding-left: 20px;
+}
+ul.MenuEmail {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.MenuEmail li {
+    display: inline-block;
+    font-weight: 600;
+    padding-left: 12px;
+    cursor: pointer;
+}
+
+ul.MenuEmail li :nth-child(2) {
+    display: inline-block;
+}
+
+ul.MenuEmail li i {
+    position: relative;
+    top: 2px;
+}
