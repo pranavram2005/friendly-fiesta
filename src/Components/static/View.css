@@ -10,8 +10,9 @@
     cursor: pointer;
   }
   .card-body{
-    font-size: 16px;
-    text-align: justify;
+    font-size: 15px;
+    line-height: 1rem;
+    text-align: left;
   }
   .content{
     color: black;
@@ -59,13 +60,22 @@
     
   }
   .head{
-    margin-top: 20px;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     gap: 5px;
   }
+  .contents{
+    width:100%;
+    margin-bottom: 30px;
+  }
+  @media only screen and (max-width: 600px) {
+    .contents{
+      display: flex;
+      justify-content: center;
+    }
+  }
   .titles{
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,4 +136,53 @@
 }
 .dropdown-menu button:hover{
   background-color: rgba(63, 63, 56, 0.103);
+}
+.cards{
+  display: flex;
+  flex-direction: row;
+}
+.changes{
+  background-color: #4d9d42;
+}
+.search_main{
+  position: relative;
+  margin-top: -50px;
+  margin-bottom: 10px;
+  width: 300px;
+  box-sizing: border-box;
+  border: 2px solid #101010;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+}
+.active{
+  display: block;
+  background-color: white;
+
+}
+.disappear{
+  display: none;
+}
+.page{
+  background-color: #4d9d42;
+}
+.buttons{
+  border: 1px solid gray;
+  margin-left: 40%;
+  display: flex;
+  padding: 5px;
+  width: fit-content;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.button{
+  margin: 2px;
+ border-radius: 50%;
+ border: none;
+}
+.button:hover{
+  background-color: #4d9d42;
+}
+.dir{
+  border: 1px black solid;
 }

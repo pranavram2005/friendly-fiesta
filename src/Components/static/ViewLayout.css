@@ -15,8 +15,8 @@ body{
     background-color: #4ef54e;
     background-image: linear-gradient(45deg, #4ef54e 0%, #FFFB7D 100%);
 }
+
 .navbar-nav{
-    
     position: relative;
     padding-left: 100px;
 }
@@ -24,7 +24,7 @@ body{
 .navbar-brand img
 {
     height: auto;
-    max-width: 230px;
+    max-width: 100%;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -40,10 +40,20 @@ body{
     background-color: #336633;
 }
 .d-flex {
-    position: absolute;
+    position: relative;
     padding-top: 40px;
-    right: 30px;
+    
 }
+@media only screen and (max-width: 600px) {
+    .d-flex {
+        position: relative;
+        padding-top: 40px;
+        right: 30px;
+        z-index: 1;
+        width: 100%;
+        margin-left: 100px;
+    }
+  }
 .d-flex img{
     margin-top: -20px;
     padding-left: 20px;

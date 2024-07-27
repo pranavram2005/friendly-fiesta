@@ -1,0 +1,55 @@
+.form-control1{
+    width: 300px;
+    height: 30px;
+}
+.t1{
+    margin-top: 60px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.enquiry_table{
+    top: 20;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-bottom: 30px;
+    width: 90%;
+}
+.enquiry1{
+    text-align: center;
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+}
+.nodata{
+    width: 100%;
+}
+
+.error-message {
+    margin-left: 10px;
+    color: #ff0000;
+    font-size: 14px;
+}
+.tick{
+    margin-top: -40px;
+    margin-left: 100px;
+    width: 500px;
+    height: 400px;
+}
+@media only screen and (max-width: 600px) {
+    .tick{
+        margin-left: 0px;
+        width: 100%;
+        height: 400px;
+    }
+  }
+.successfull{
+    color: #65CC2E;
+    font-size: x-large;
+    text-align: center;
+}
+.enq_name{
+    width: 150px;
+}

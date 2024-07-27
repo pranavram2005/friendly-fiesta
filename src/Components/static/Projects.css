@@ -1,21 +1,21 @@
 table{
-    background-color: #4d9d42;
+    background-color: hsl(113, 41%, 44%);
     color: white;
-    width: 100%;
+    width: 95vw;
     margin-top: -6px;
 }
-th{
+table tr th{
     text-align: center;
     font-size: 20px;
     border: 1px black solid;
 }
-.title{
+title{
     width: 600px;
 }
-.tr{
+tr{
     border: 1px black solid;
 }
-td{
+table tr td{
     border: 1px black solid;
     text-align: center;
 }
@@ -46,6 +46,7 @@ h2{
     text-align: center;
 }
 .categoru{
+    width: fit-content;
     margin-top: 20px;
     border: 2px solid black;
 }
@@ -63,4 +64,7 @@ label{
 .search{
     width: 300px;
     margin-left: 10px;
+}
+.search1    {
+    color: black;
 }

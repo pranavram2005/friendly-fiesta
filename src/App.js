@@ -9,31 +9,33 @@ import SubCategory from './Components/SubCateg';
 import View from './Components/View';
 import Admin from './Components/Admin';
 import Projects from './Components/Projects';
+import ViewAdmin from './Components/ViewAdmin';
+import Enquiry from './Components/Enquiry';
 function App() {
   const [Categories,SetCategories] = useState([])
   const [SubCategories,SetSubCategories] = useState([])
 //category
     async function fetchcateg(){
-        const response = await axios.get("https://chennaisunday.onrender.com/category/view_category");
+        const response = await axios.get("http://localhost:5000/category/view_category");
         SetCategories(response.data);
         }
     useEffect(()=>{
         fetchcateg();
     },[]);
     async function delcateg(id){
-      await axios.delete("https://chennaisunday.onrender.com/category/delete_category/"+id)
+      await axios.delete("http://localhost:5000/category/delete_category/"+id)
       fetchcateg();
     }
 //sub category
     async function fetchsubcateg(){
-      const response = await axios.get("https://chennaisunday.onrender.com/subcategory/view_subcategory");
+      const response = await axios.get("http://localhost:5000/subcategory/view_subcategory");
       SetSubCategories(response.data);
       }
   useEffect(()=>{
       fetchsubcateg();
   },[]);
   async function delsubcateg(id){
-    await axios.delete("https://chennaisunday.onrender.com/subcategory/delete_subcategory/"+id)
+    await axios.delete("http://localhost:5000/subcategory/delete_subcategory/"+id)
     fetchsubcateg();
   }
   return (
@@ -46,7 +48,9 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route path="post" element={<Post Categories={Categories} SubCategories={SubCategories}/>} />
           <Route path="category" element={<Categ fetchcateg={fetchcateg} Categories={Categories} delcateg={delcateg}/>} />
-          <Route path='subcategory' element={<SubCategory fetchsubcateg={fetchsubcateg} SubCategories={SubCategories} delsubcateg={delsubcateg}/>}/>
+          <Route path='subcategory' element={<SubCategory fetchsubcateg={fetchsubcateg} Categories={Categories} SubCategories={SubCategories} delsubcateg={delsubcateg}/>}/>
+          <Route path='view' element={<ViewAdmin fetchsubcateg={fetchsubcateg} Categories={Categories} SubCategories={SubCategories} delsubcateg={delsubcateg}/>}/>
+          <Route path='enquiry' element={<Enquiry/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

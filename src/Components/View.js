@@ -2,19 +2,32 @@ import axios from "axios"
 import React,{ useEffect, useState } from "react";
 import './static/View.css'
 import ViewLayout from "./ViewLayout";
+import { useMemo } from 'react';
+import Card from "./Card";
 const View = (props) =>{
     const [Data,SetData] = useState([])
     const [Filtercateg,Setfiltercateg] = useState("")
     const [Subforcat,SetSubforcat] = useState("")
     const [Activeid,SetActivid] = useState(null)
+    const [Search,SetSearch] = useState([]);
+    const [Pages,SetPages] = useState(1)
+
     async function fetchProduct(){
-        const response = await axios.get("https://chennaisunday.onrender.com/view/view_product");
+        const response = await axios.get("http://localhost:5000/view/view_product");
         SetData(response.data)
+        SetSearch(response.data)
     }
     useEffect(()=>{
         fetchProduct()
     },[])
-
+    const ForSearch=(e)=>{
+      if (e.length===0){
+        SetSearch(Data);
+      }
+      else{  
+      SetSearch(Data.filter(f=>Object.values(f.title).join('').toLowerCase().includes(e.target.value.toLowerCase())));
+    SetPages(1)
+    }}
     const getabstract = (urls,titles) =>{
         fetch(urls).then((response)=>{
             response.blob().then((blob)=>{
@@ -27,7 +40,7 @@ const View = (props) =>{
         })
     }
     const changecateg =async (categ,id)=>{
-
+      SetPages(1)
         SetActivid(id)
         SetSubforcat("")
         Setfiltercateg(categ)
@@ -40,7 +53,8 @@ const View = (props) =>{
     product.category.length > 0 : 
     (Subforcat === "" ? product.category === Filtercateg : product.sub_category === Subforcat);
     }
-    const Projects = Data.filter(filtering)
+
+    const Projects = Search.filter(filtering)
     
     const subcatfilter = (data) =>{
             return data.category === Filtercateg
@@ -52,24 +66,54 @@ const View = (props) =>{
     }
     const Subcategories = props.SubCategories.filter(subcatfilter)
 
-        // State to track which card is toggled
         const [toggledCard, setToggledCard] = useState(null);
       
-        // Function to handle the toggle
         const handleToggle = (id) => {
           if (toggledCard === id) {
-            setToggledCard(null); // Reset if the same card is clicked again
+            setToggledCard(null); 
           } else {
-            setToggledCard(id); // Set the toggled card ID
+            setToggledCard(id); 
           }
 
         };
+
+        var arrayOfArrays = [];
+
+        for (var i=0; i<Projects.length; i+=8) {
+            arrayOfArrays.push(Projects.slice(i,i+8));
+          }
+          let total = [];
+const count = arrayOfArrays.length
+  for (let j=0; j<count ;j++){
+    total.push(j+1)
+  }
+      
+ const prev =()=>{
+  SetPages(Pages-1)
+ }
+ const next =()=>{
+  if (Pages===arrayOfArrays.length){
+    SetPages(arrayOfArrays.length)
+  }
+  SetPages(Pages+1)
+ }
+ const Changebutton =(p,id)=>{
+  SetPages(p)
+ }
+ const total2 = total.slice(1,total.length-1)
+ const Web_Devs = Search.sort(function(a, b){return a.rank - b.rank})
     return(
         <>
                  <div><ViewLayout/></div>
 
          <div className="Apps">
-            <div className="heading"><h1>IEEE Projects</h1></div>
+            <div className="heading"><h1>IEEE Projects (2024-2025){total2}
+            </h1>
+            <div className="search_div">
+   <input type="text" onChange={ForSearch} className="search_main" placeholder="SEARCH"/>
+   </div>  
+            </div>
+            
             <div>
       <ul className="nav nav-justified">
         <li className="nav-item">
@@ -97,49 +141,23 @@ const View = (props) =>{
         ))}
       </ul>
     </div>
-              <div class="head">
-              {Projects.map((product) => (
-        <div className="card main" key={product._id}>
-          {toggledCard === product._id ? (
-            <div className="content" width="100%">
-            <div className="titles">
-              <h4 className="card-title">{product.title}</h4>
-            </div>
-            <div className="card-body">{product.description}</div>
-            <div
-              className="card-footer"
-              onClick={() => getabstract(`https://chennaisunday.onrender.com/view/files/${product.file_upload}`, product.title)}
-            >
-              Abstract
-            </div>
-            
-          </div>
-          ) : (
-            <div className="video">
-              <iframe
-                width="100%"
-                height="200px"
-                src={product.video}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-                        <h4 className="card-title" onClick={() => handleToggle(product._id)}>{product.title}</h4>
-            </div>
-          )}
-          <div className="footer">
-          <span class="badge rounded-pill bg-dark">{product.category}</span>
-          <button
-              className="btn"
-              onClick={() => handleToggle(product._id)}
-            >
-              {toggledCard===product._id?"Hide Desriptions":"Show Descriptions"}
-            </button>
-        </div></div>
-      ))}
-</div></div>
+     
+    {arrayOfArrays.length>0?(<div className="contents">{arrayOfArrays && arrayOfArrays.map((pds, index) => (
+          <div key={index}>{index+1===Pages?(<Card pds={pds} toggledCard={toggledCard} getabstract={getabstract} handleToggle={handleToggle} Search={Search}/>):null}</div>
+        ))}</div>):(<p>no data</p>)}
+        {arrayOfArrays.length===0||arrayOfArrays.length===1?null:<div className='buttons'>
+        {Pages===1?null:(<button className="btn dir" onClick={prev}>«Prev</button>)}
+        <button className={`button ${Pages===1?"page":""} active`} onClick={()=>Changebutton(1)}>1</button>
+        {Pages===1||Pages===2||Pages===3?(null):<>...</>}
+          {total2.map((p,index)=>(<button onClick={()=>Changebutton(p,index)} className={`button ${Pages===p?"page":""} ${Pages===p+1||Pages===p||Pages===p-1?"active":"disappear"}`} >{p}</button>))}
+         {Pages===arrayOfArrays.length||Pages===arrayOfArrays.length-1||Pages===arrayOfArrays.length-2?null:<>...</>}
+         <button className={`button ${Pages===total.length?"page":""} active`} onClick={()=>Changebutton(total.length)}>{total.length}</button>
+
+          {Pages===arrayOfArrays.length?null:<button className="btn dir" onClick={next}>Next»</button>}
+           </div>}
+</div>
+
+      
             
             
             

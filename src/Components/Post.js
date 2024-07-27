@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './static/Post.css'
 import axios from 'axios';
 
 const Post = (props) =>{
+  const [Datas,SetDatas] = useState([])
+    async function fetchProduct(){
+    const response = await axios.get("http://localhost:5000/view/view_product");
+    SetDatas(response.data)
+}
+useEffect(()=>{
+    fetchProduct()
+},[])
+    const ranks = Datas.length;
     const [Subcategs,SetSubcategs] = useState([props.SubCategories])
-    const [Product,SetProduct] = useState({title:"",category:"",subcategory:"",description:"",fileupload:"",video:""})
+    const [Product,SetProduct] = useState({title:"",category:"",subcategory:"",description:"",fileupload:"",video:"",rank:ranks+1})
     const handleInputChange =(event)=>{
       if (event.target.name === "category"){
         SetSubcategs(props.SubCategories.filter((data)=>data.category === event.target.value))
@@ -23,15 +32,19 @@ const Post = (props) =>{
         prod.append('description', Product.description)
         prod.append('fileupload', Product.fileupload)
         prod.append('video', Product.video)
+        prod.append('rank',ranks+1)
+        
 
-        await axios.post('https://chennaisunday.onrender.com/product/add',prod);
-        SetProduct({title:"",category:"",subcategory:"",description:"",fileupload:"",video:""})
+        await axios.post('http://localhost:5000/product/add',prod);
+        SetProduct({title:"",category:"",subcategory:"",description:"",fileupload:"",video:"",rank:ranks+1})
+        fetchProduct()
         alert("Data submitted successfully")
       }  
     
     return(
         <>
         <div className="form">
+          Rank:{ranks+1}
         <form onSubmit={handleFormSubmit} encType="multipart/form-data">
             <div className='grid mb-2'><div>
                <label for="title" className="form-label" >Title:</label>
@@ -67,7 +80,8 @@ const Post = (props) =>{
                 <div>
                <label for="video" className="form-label">Video:</label>
                 <input type="text" name="video" placeholder="Project video" className="form-control" onChange={handleInputChange}/>
-                </div></div>
+                </div>
+                </div>
                 <button type='submit'>SUBMIT</button>
                 </form>
         </div>

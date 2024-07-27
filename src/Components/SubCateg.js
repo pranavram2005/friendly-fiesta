@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const SubCateg = (props)=>{
+    const categories = props.Categories;
     const [SubCategory,SetSubCategory] = useState({category:"",subcategory:""})
     const handleSubCategoryinput = (event)=>{
         SetSubCategory({...SubCategory,[event.target.name]:event.target.value})
@@ -15,16 +16,21 @@ const SubCateg = (props)=>{
                 try{
                 if (!SubCategory.subcategory) return;
                     event.preventDefault();
-                    await axios.post("https://chennaisunday.onrender.com/subcategory/add_subcategory",SubCategory)
+                    await axios.post("http://localhost:5000/subcategory/add_subcategory",SubCategory)
                     SetSubCategory({category:"",subcategory:""})
                     props.fetchsubcateg()
-                    navigate('/');
+                    navigate('/post');
                 }catch(err){
                         alert("Sub Category already exists")
                     }
                 }}>
                <label for="category" className="form-label">Category:</label>                
-                <input type='text' name='category' value={SubCategory.category} onChange={handleSubCategoryinput}/>
+                 <select name="category" className='form-control1' value={SubCategory.category} onChange={handleSubCategoryinput}>
+                <option>----Please Select a category----</option>
+                {props.Categories.map((category) => (
+                <option key={category._id} value={category.category}>{category.category}</option>
+                ))}
+                </select>
                 <label for="subcategory" className="form-label">Sub Category:</label>                
                 <input type='text' name='subcategory' value={SubCategory.subcategory} onChange={handleSubCategoryinput}/>
                 <button type='submit'>Add</button></form>

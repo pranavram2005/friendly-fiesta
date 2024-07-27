@@ -20,6 +20,12 @@ const Layout = () => {
             <li class="nav-item">
             <Link to="/subcategory" class="nav-link">Sub Category</Link>
             </li>
+            <li class="nav-item">
+            <Link to="/view" class="nav-link">View</Link>
+            </li>
+            <li class="nav-item">
+            <Link to="/enquiry" class="nav-link">Enquiry</Link>
+            </li>
           </ul>
           
         </div>

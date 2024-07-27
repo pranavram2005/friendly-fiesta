@@ -15,10 +15,10 @@ const Categ = (props)=>{
                 try{
                 if (!Category.category) return;
                     event.preventDefault();
-                    await axios.post("https://chennaisunday.onrender.com/category/add_category",Category)
+                    await axios.post("http://localhost:5000/category/add_category",Category)
                     SetCategory({category:""})
                     props.fetchcateg()
-                    navigate('/');
+                    navigate('/post');
                 }catch(err){
                         alert("Data already exists")
                     }
@@ -27,7 +27,7 @@ const Categ = (props)=>{
                 <input type='text' name='category' value={Category.category} onChange={handleCategoryinput}/>
                 <button type='submit'>Add</button></form>
                 </div>
-                <div>
+                <div className='table_categs'>
                     <table>
                         <tr><th>Category</th><th>Delete</th></tr>
                 {props.Categories.length?(props.Categories.map((category) => (
