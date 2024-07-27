@@ -5,14 +5,14 @@ import { parseISO, format } from 'date-fns';
 const Enquiry = () =>{
     const [Data,SetData] = useState([]);
     const fetchdata = async()=>{
-        const response = await axios.get("http://localhost:5000/enquiry/view");
+        const response = await axios.get("https://chennaisunday-backend.onrender.com/enquiry/view");
         SetData(response.data);
     } 
     useEffect(()=>{
         fetchdata()
     },[])
     const deleteenquiry = async(id)=>{
-        await axios.delete("http://localhost:5000/enquiry/delete/"+id);
+        await axios.delete("https://chennaisunday-backend.onrender.com/enquiry/delete/"+id);
         alert("Delete Successfully");
         fetchdata()
     }

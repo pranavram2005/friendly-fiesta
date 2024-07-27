@@ -8,7 +8,7 @@ const ViewAdmin = ()=>{
     const [newRank,SetnewRank] = useState(null)
     const [Search,SetSearch] = useState([]);
     async function fetchProduct(){
-        const response = await axios.get("http://localhost:5000/view/view_product");
+        const response = await axios.get("https://chennaisunday-backend.onrender.com/view/view_product");
         SetData(response.data)
         SetSearch(response.data)
     }
@@ -27,8 +27,8 @@ const ViewAdmin = ()=>{
     const Projects = Search.sort(function(a, b){return a.rank - b.rank})
     async function delprouct(id, filename) {
       try {
-          await axios.delete(`http://localhost:5000/product/delete/file/${filename}`);
-          await axios.delete("http://localhost:5000/product/delete/id/"+id);
+          await axios.delete(`https://chennaisunday-backend.onrender.com/product/delete/file/${filename}`);
+          await axios.delete("https://chennaisunday-backend.onrender.com/product/delete/id/"+id);
           alert("Deleted Successfully");
           fetchProduct();
       } catch (error) {
@@ -38,7 +38,7 @@ const ViewAdmin = ()=>{
   }
   const handleRankSubmit = async(id)=>{
     try{
-    axios.put("http://localhost:5000/product/update/rank/"+id, { newRank })
+    axios.put("https://chennaisunday-backend.onrender.com/product/update/rank/"+id, { newRank })
     SetEdit(null);
     alert("changed")
     

@@ -16,7 +16,7 @@ const SubCateg = (props)=>{
                 try{
                 if (!SubCategory.subcategory) return;
                     event.preventDefault();
-                    await axios.post("http://localhost:5000/subcategory/add_subcategory",SubCategory)
+                    await axios.post("https://chennaisunday-backend.onrender.com/subcategory/add_subcategory",SubCategory)
                     SetSubCategory({category:"",subcategory:""})
                     props.fetchsubcateg()
                     navigate('/post');

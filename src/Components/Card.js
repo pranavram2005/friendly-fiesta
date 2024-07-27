@@ -49,7 +49,7 @@ const Card = (props)=>{
   const newErrors = validateForm(EnquiryData);
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      await axios.post("http://localhost:5000/enquiry/add",EnquiryData);
+      await axios.post("https://chennaisunday-backend.onrender.com/enquiry/add",EnquiryData);
       SetEnquiryData(forminitialstate);
       SetSubmitted(false);
       setTimeout(() => {
@@ -74,7 +74,7 @@ const Card = (props)=>{
             <div className="card-body">{product.description}</div>
             <div
               className="card-footer"
-              onClick={() => props.getabstract(`http://localhost:5000/view/files/${product.file_upload}`, product.title)}
+              onClick={() => props.getabstract(`https://chennaisunday-backend.onrender.com/view/files/${product.file_upload}`, product.title)}
             >
               Abstract
             </div>

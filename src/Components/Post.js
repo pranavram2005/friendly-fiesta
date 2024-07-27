@@ -5,7 +5,7 @@ import axios from 'axios';
 const Post = (props) =>{
   const [Datas,SetDatas] = useState([])
     async function fetchProduct(){
-    const response = await axios.get("http://localhost:5000/view/view_product");
+    const response = await axios.get("https://chennaisunday-backend.onrender.com/view/view_product");
     SetDatas(response.data)
 }
 useEffect(()=>{
@@ -35,7 +35,7 @@ useEffect(()=>{
         prod.append('rank',ranks+1)
         
 
-        await axios.post('http://localhost:5000/product/add',prod);
+        await axios.post('https://chennaisunday-backend.onrender.com/product/add',prod);
         SetProduct({title:"",category:"",subcategory:"",description:"",fileupload:"",video:"",rank:ranks+1})
         fetchProduct()
         alert("Data submitted successfully")

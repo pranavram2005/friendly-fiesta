@@ -15,7 +15,7 @@ const Categ = (props)=>{
                 try{
                 if (!Category.category) return;
                     event.preventDefault();
-                    await axios.post("http://localhost:5000/category/add_category",Category)
+                    await axios.post("https://chennaisunday-backend.onrender.com/category/add_category",Category)
                     SetCategory({category:""})
                     props.fetchcateg()
                     navigate('/post');

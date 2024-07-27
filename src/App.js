@@ -16,26 +16,26 @@ function App() {
   const [SubCategories,SetSubCategories] = useState([])
 //category
     async function fetchcateg(){
-        const response = await axios.get("http://localhost:5000/category/view_category");
+        const response = await axios.get("https://chennaisunday-backend.onrender.com/category/view_category");
         SetCategories(response.data);
         }
     useEffect(()=>{
         fetchcateg();
     },[]);
     async function delcateg(id){
-      await axios.delete("http://localhost:5000/category/delete_category/"+id)
+      await axios.delete("https://chennaisunday-backend.onrender.com/category/delete_category/"+id)
       fetchcateg();
     }
 //sub category
     async function fetchsubcateg(){
-      const response = await axios.get("http://localhost:5000/subcategory/view_subcategory");
+      const response = await axios.get("https://chennaisunday-backend.onrender.com/subcategory/view_subcategory");
       SetSubCategories(response.data);
       }
   useEffect(()=>{
       fetchsubcateg();
   },[]);
   async function delsubcateg(id){
-    await axios.delete("http://localhost:5000/subcategory/delete_subcategory/"+id)
+    await axios.delete("https://chennaisunday-backend.onrender.com/subcategory/delete_subcategory/"+id)
     fetchsubcateg();
   }
   return (

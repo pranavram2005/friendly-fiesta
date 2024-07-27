@@ -31,7 +31,7 @@ const Projects = (props)=>{
     
     const [Search,SetSearch] = useState([]);
     async function fetchProduct(){
-        const response = await axios.get("http://localhost:5000/view/view_product");
+        const response = await axios.get("https://chennaisunday-backend.onrender.com/view/view_product");
         SetData(response.data)
         SetSearch(response.data)
     }
